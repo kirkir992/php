@@ -1,0 +1,115 @@
+<?php
+session_start();
+
+// Konfiguracja połączenia z Active Directory
+$ldap_host = "ldap://your-domain-controller"; // Zastąp adresem Twojego kontrolera domeny
+$ldap_port = 389;
+$ldap_domain = "yourdomain.local"; // Zastąp nazwą Twojej domeny
+$ldap_base_dn = "DC=yourdomain,DC=local"; // Zastąp odpowiednim Base DN
+
+// Sprawdzanie, czy użytkownik jest już zalogowany
+if (isset($_SESSION['username'])) {
+    header("Location: dashboard.php");
+    exit();
+}
+
+// Obsługa formularza logowania
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Połączenie z Active Directory
+    $ldap_conn = ldap_connect($ldap_host, $ldap_port);
+    if (!$ldap_conn) {
+        $error = "Nie można połączyć się z serwerem LDAP.";
+    } else {
+        // Ustawienie opcji protokołu
+        ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+        ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
+
+        // Tworzenie pełnego DN użytkownika
+        $ldap_user = $username . "@" . $ldap_domain;
+
+        // Próba uwierzytelnienia
+        $bind = @ldap_bind($ldap_conn, $ldap_user, $password);
+
+        if ($bind) {
+            // Pomyślne uwierzytelnienie
+            $_SESSION['username'] = $username;
+            ldap_close($ldap_conn);
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            $error = "Nieprawidłowa nazwa użytkownika lub hasło.";
+            ldap_close($ldap_conn);
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie - Active Directory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Logowanie</h2>
+        <?php if (isset($error)): ?>
+            <p class="error"><?php echo htmlspecialchars($error); ?></p>
+        <?php endif; ?>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Nazwa użytkownika" required>
+            <input type="password" name="password" placeholder="Hasło" required>
+            <button type="submit">Zaloguj się</button>
+        </form>
+    </div>
+</body>
+</html>
