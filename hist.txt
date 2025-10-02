@@ -1,0 +1,220 @@
+   13  yum install php-ldap.x86_64
+   14  systemctl restart httpd
+   15  nmtui
+   16  cp test/ /var/www/html/
+   17  cp -r test/ /var/www/html/
+   18  cd /var/www/html/
+   19  ll
+   20  ip a
+   21  ping 192.168.0.165
+   22  cd /etc/openvpn/
+   23  ll
+   24  vi /usr/lib/systemd/system/openvpn.service
+   25  cat /usr/lib/systemd/system/openvpn.service
+   26  vi /home/tom/httpsrv.ovpn
+   27  systemctl enable openvpn.service
+   28  systemctl start openvpn.service
+   29  systemctl status openvpn.service
+   30  cat /home/tom/httpsrv.ovpn
+   31  ll
+   32  cd /home/tom/
+   33  ll
+   34  less +G /var/log/messages
+   35  ll /home/tom/httpsrv.ovpn
+   36  chmod 600 /home/tom/httpsrv.ovpn
+   37  systemctl start openvpn.service
+   38  systemctl status openvpn.service
+   39  systemctl status openvpn.service --help
+   40  systemctl status openvpn.service
+   41  openvpn /home/tom/httpsrv.ovpn
+   42  cat /usr/lib/systemd/system/openvpn.service
+   43  reboot
+   44  systemctl status openvpn.service
+   45  chmod tom:tom /home/tom/httpsrv.ovpn
+   46  chown tom:tom /home/tom/httpsrv.ovpn
+   47  chmod 644 /home/tom/httpsrv.ovpn
+   48  ll /home/tom/httpsrv.ovpn
+   49  systemctl start openvpn.service
+   50  systemctl status openvpn.service
+   51  cat /etc/group |grep tom
+   52  cp /home/tom/httpsrv.ovpn /etc/openvpn/client/client.conf
+   53  systemctl disable openvpn.service
+   54  reboot
+   55  ip a
+   56  mv /etc/openvpn/client/client.conf /etc/openvpn/client/openvpn.conf
+   57  cat /etc/openvpn/client/openvpn.conf
+   58  ll /etc/openvpn/client/openvpn.conf
+   59  reboot
+   60  vi /usr/lib/systemd/system/openvpn.service
+   61  systemctl enable -now openvpn.service
+   62  systemctl enable --now openvpn.service
+   63  systemctl status openvpn.service
+   64  ip a
+   65  ping 192.168.0.165
+   66  cd /var/www/html/test/
+   67  ll
+   68  vi config.php
+   69  cd /var/log
+   70  ls -ltr
+   71  cd httpd
+   72  ls -ltr
+   73  less +G access_log
+   74  cd ../
+   75  less +G messages
+   76  ls -ltr
+   77  cd -
+   78  ll
+   79  cd /var/www/html/test/
+   80  ll
+   81  vi config.php
+   82  vi config.php
+   83  ldapsearch
+   84  yum install openldap
+   85  ldapsearch
+   86  ldapsearch
+   87  find / -name ldapsearch
+   88  yum install ldap-utils
+   89  yum search ldap-utils
+   90  yum search ldap
+   91  yum install openldap-clients.x86_64
+   92  ldapsearch
+   93  ldapsearch -x -b "DC=htz,DC=lan" -H ldap://192.168.0.165:389
+   94  ldapsearch -x -b "DC=htz,DC=lan" -H ldap://192.168.0.165
+   95  ldapsearch -x -b "DC=htz,DC=lan" -H ldap://192.168.0.165:389
+   96  find / -name ldap.conf
+   97  vi /etc/openldap/ldap.conf
+   98  ldapsearch -x -b "DC=htz,DC=lan" -H ldap://192.168.0.165:389
+   99  ping 192.168.0.165
+  100  telnet 192.168.0.165 389
+  101  yum install net-tools
+  102  telnet 192.168.0.165 389
+  103  yum install telnet
+  104  telnet 192.168.0.165 389
+  105  ldapsearch -x -b "DC=htz,DC=lan" -H ldap://192.168.0.165:389
+  106  ldapsearch -D "cn=Users" -W -p 389 -h 192.168.0.165 -b "DC=htz,DC=lan" -s sub -x "cn=tom_adm"
+  107  ldapsearch -D "cn=Users" -W -p 389 -h 192.168.0.165 -b "DC=htz,DC=lan" -s sub -x "cn=test"
+  108  ldapsearch -D "cn=Users" -W -p 389 -h 192.168.0.165 -b "DC=htz,DC=lan" -s sub -x "cn=test"
+  109  yum install cookpit
+  110  yum install cokpit
+  111  yum install cockpit
+  112  systemctl enable --now cockpit
+  113  systemctl enable --now cockpit.socket
+  114  systemctl status cockpit.socket
+  115  ip a
+  116  ldapsearch -D "cn=Users" -W -p 389 -h 192.168.0.165 -b "DC=htz,DC=lan" -s sub -x "cn=test"
+  117  ldapsearch -D "cn=Users" -W -p 389 -h 192.168.0.165 -b "DC=htz,DC=lan"
+  118  id test
+  119  realm list
+  120  ldapsearch -D "cn=Users" -W -p 389 -h 192.168.0.165 -b "DC=htz,DC=lan" -s sub "(cn=*)"
+  121  ssh tom@192.168.0.160
+  122  ldapsearch -x -h 192.168.0.165 -p 389 -D  "test@htz.lan" -W -b "dc=htz,dc=lan"
+  123  ldapsearch -x -h 192.168.0.165 -p 389 -D  "test@htz.lan" -W -b "dc=htz,dc=lan"
+  124  cd /var/www/html/test/config.php
+  125  vi /var/www/html/test/config.php
+  126  ssh tom@192.168.0.160
+  127  vi /etc/sssd/sssd.conf
+  128  systemctl restart sssd
+  129  systemctl status sssd
+  130  ssh tom@192.168.0.160
+  131  vi /etc/sssd/sssd.conf
+  132  systemctl restart sssd
+  133  systemctl status sssd
+  134  id test
+  135  id test
+  136  realm list
+  137  id zendto
+  138  getent group zendto
+  139  vi /etc/sssd/sssd.conf
+  140  vi /etc/sssd/sssd.conf
+  141  systemctl restart sssd
+  142  systemctl status sssd
+  143  id test
+  144  id zendto
+  145  id zendtozendto@htz.lan
+  146  id zendto@htz.lan
+  147  shutdown
+  148  history
+  149  id test
+  150  ldapsearch -x -h 192.168.0.165 -p 389 -D  "test@htz.lan" -W -b "dc=htz,dc=lan"
+  151  cat /etc/sssd/sssd.conf
+  152  ping dc1.htz.lan
+  153  vi /etc/hosts
+  154  ip a
+  155  vi /etc/hosts
+  156  ping dc1.htz.lan
+  157  id test
+  158  cat /etc/krb5.conf
+  159  vi /etc/krb5.conf
+  160  systemctl restart sssd
+  161  systemctl status sssd
+  162  id test
+  163  reboot
+  164  id test
+  165  relm list
+  166  realm list
+  167  id test@htz.lan
+  168  ip a
+  169  cd /var/www/
+  170  ls -ltr
+  171  cd ../log
+  172  ls -ltr
+  173  less +G messages
+  174  vi /etc/selinux/config
+  175  reboot
+  176  cd /varlog
+  177  cd /var/log
+  178  less +G messages
+  179  ausearch -c 'php-fpm' --raw | audit2allow -M my-phpfpm
+  180  semodule -i my-phpfpm.pp
+  181  less +G messages
+  182  less +G messages
+  183  getenforce
+  184  vi /etc/selinux/config
+  185  setenforce 0
+  186  getenforce
+  187  reboot
+  188  getenforce
+  189  cd /var/log
+  190  tail -f messages
+  191  tail -f messages
+  192  ls -ltr
+  193  cd sssd/
+  194  ll
+  195  ls -ltr
+  196  less +G sssd_htz.lan.log
+  197  ping dc1.htz.lan
+  198  cd ../httpd/
+  199  ll -ltr
+  200  less +G error_log
+  201  tail -f  error_log
+  202  tail -f  access_log
+  203  ld -ltr
+  204  ls -ltr
+  205  vf ../
+  206  vf ../
+  207  cd ../
+  208  ll -ltr
+  209  cd php-fpm/
+  210  ls -ltr
+  211  tail -f error.log
+  212  tail -f www-error.log
+  213  ls -ltr
+  214  ll -ltr
+  215  cd ../
+  216  ll -ltr
+  217  cd audit/
+  218  ll -ltr
+  219  cd ../private/
+  220  ll -ltr
+  221  cd ../
+  222  cd anaconda/
+  223  ll -ltr
+  224  vi /var/www/html/test/login.php
+  225  systemctl status sssd
+  226  ip a
+  227  id test@htz.lan
+  228  cd /var/log
+  229  ls -ltr
+  230  less +G messages
+  231  vi /var/www/html/test/config.php
+  232  history
