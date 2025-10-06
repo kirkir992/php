@@ -10,12 +10,19 @@ if ($conn->connect_error) {
 }
 
 // Handle update
+// Handle update
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
     $poweron = $_POST['poweron'];
     $info = $_POST['info'];
 
-    $stmt = $conn->prepare("UPDATE servers SET poweron = ?, info = ? WHERE id = ?");
+    $sql = "UPDATE servers SET poweron = ?, info = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
     $stmt->bind_param("ssi", $poweron, $info, $id);
 
     if ($stmt->execute()) {
@@ -24,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Update failed: " . $stmt->error;
     }
     $stmt->close();
+}
+
 } else if (isset($_GET['id'])) {
     // Fetch existing data
     $id = $_GET['id'];
