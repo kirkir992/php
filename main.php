@@ -1,3 +1,4 @@
+Fatal error: Call to a member function bind_param() on a non-object in update_server.php on line 24
 <?php
 $host = 'localhost';
 $dbname = 'your_database_name';
