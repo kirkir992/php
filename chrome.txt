@@ -1,1 +1,2 @@
 https://googlechromelabs.github.io/chrome-for-testing/
+https://developer.chrome.com/blog/chrome-for-testing?hl=pl
